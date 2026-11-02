@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+cd "$(dirname "$0")/.."
+./scripts/compose up -d --wait db
+./scripts/compose run --rm --no-deps app php artisan test
+./scripts/compose run --rm --no-deps app vendor/bin/pint --test
+./scripts/compose run --rm --no-deps frontend npm test
+./scripts/compose run --rm --no-deps frontend npm run build

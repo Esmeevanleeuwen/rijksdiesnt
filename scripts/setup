@@ -1,0 +1,21 @@
+#!/bin/sh
+# Repeatable local demo setup. Preserves existing .env files.
+set -eu
+cd "$(dirname "$0")/.."
+[ -f .env ] || cp .env.example .env
+[ -f backend/.env ] || cp backend/.env.example backend/.env
+# PostgreSQL runs as its own container user, including with a restrictive umask.
+chmod a+rx docker/postgres
+chmod a+r docker/postgres/01-testing.sql
+./scripts/compose build app
+install_mode=--prefer-dist
+if [ -n "${CODEX_PROXY_CERT:-}" ]; then install_mode=--prefer-source; fi
+./scripts/compose run --rm --no-deps app composer install "$install_mode" --no-interaction --no-progress
+if ! grep -q '^APP_KEY=.' backend/.env; then
+    ./scripts/compose run --rm --no-deps app php artisan key:generate --ansi
+fi
+./scripts/compose up -d --wait db
+./scripts/compose run --rm --no-deps app php artisan migrate --force
+./scripts/compose run --rm --no-deps app php artisan db:seed --force
+./scripts/compose run --rm --no-deps frontend npm ci --no-audit --no-fund
+./scripts/compose up -d app frontend

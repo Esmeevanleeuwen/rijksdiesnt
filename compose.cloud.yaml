@@ -1,0 +1,21 @@
+# Only for the managed cloud environment: retain its proxy and CA trust.
+services:
+  app:
+    build:
+      secrets:
+        - proxy_ca
+    environment:
+      COMPOSER_HOME: /tmp/composer
+      COMPOSER_CAFILE: /run/cloud-ca.pem
+      GIT_SSL_CAINFO: /run/cloud-ca.pem
+    volumes:
+      - /etc/ssl/certs/ca-certificates.crt:/run/cloud-ca.pem:ro
+  frontend:
+    environment:
+      NODE_EXTRA_CA_CERTS: /run/cloud-ca.pem
+    volumes:
+      - /etc/ssl/certs/ca-certificates.crt:/run/cloud-ca.pem:ro
+
+secrets:
+  proxy_ca:
+    file: /etc/ssl/certs/ca-certificates.crt

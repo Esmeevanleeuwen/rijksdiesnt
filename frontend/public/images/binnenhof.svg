@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 480" role="img" aria-labelledby="title desc">
+  <title id="title">Illustratie van het Binnenhof</title><desc id="desc">Een eigen illustratie van historische Nederlandse overheidsgebouwen, met een blauwe lucht en water op de voorgrond.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#418fc3"/><stop offset=".7" stop-color="#a9cedf"/><stop offset="1" stop-color="#e1e7e7"/></linearGradient>
+    <linearGradient id="water" x2="0" y2="1"><stop stop-color="#5c8191"/><stop offset="1" stop-color="#8db4c5"/></linearGradient>
+    <linearGradient id="stone" x2="1" y2="0"><stop stop-color="#ad9c79"/><stop offset=".5" stop-color="#dac8a0"/><stop offset="1" stop-color="#b09b79"/></linearGradient>
+    <linearGradient id="roof" x2="1" y2="1"><stop stop-color="#36494d"/><stop offset="1" stop-color="#6b7775"/></linearGradient>
+    <pattern id="windows" width="34" height="46" patternUnits="userSpaceOnUse"><rect x="12" y="8" width="12" height="23" rx="4" fill="#293b42"/><path d="M18 9v21m-6-11h12" stroke="#b2ad8d" stroke-width="1.4"/><path d="M11 33h14" stroke="#8a7d65" stroke-width="2"/></pattern>
+    <pattern id="brick" width="34" height="14" patternUnits="userSpaceOnUse"><path d="M0 1h34M0 8h34m-17-7v7M0 8v7m34-7v7" stroke="#645d50" stroke-opacity=".16" stroke-width=".6"/></pattern>
+    <filter id="cloud"><feGaussianBlur stdDeviation="15"/></filter>
+  </defs>
+  <rect width="1440" height="480" fill="url(#sky)"/>
+  <g fill="#fff" opacity=".28" filter="url(#cloud)"><ellipse cx="250" cy="106" rx="210" ry="22"/><ellipse cx="550" cy="65" rx="200" ry="20"/><ellipse cx="1240" cy="112" rx="260" ry="22"/></g>
+  <rect y="389" width="1440" height="91" fill="url(#water)"/>
+  <path d="M0 402h1440M15 420h380m80 5h250m90-12h280m70 26h225M0 451h220m80 11h420m140-11h300" stroke="#c4d9df" opacity=".34" stroke-width="2"/>
+  <g fill="#4f6257"><path d="M0 334q48-58 77-16 40-77 82-17 35-62 85-16 28-31 61 8 40-37 67 27 38-22 58 25v55H0Z"/><path d="M1190 355q22-71 58-27 30-69 60-24 40-56 65-5 43-32 67 15v87h-250Z"/></g>
+  <g stroke="#817862" stroke-width="1">
+    <path d="M335 286h316v104H335Z" fill="url(#stone)"/><path d="m319 286 33-48h282l35 48Z" fill="url(#roof)"/><path d="M338 300h310v80H338Z" fill="url(#windows)"/>
+    <path d="M635 259h175v132H635Z" fill="#bda985"/><path d="m623 259 25-64h148l26 64Z" fill="url(#roof)"/><path d="M647 272h148v112H647Z" fill="url(#windows)"/>
+    <path d="M803 275h191v118H803Z" fill="url(#stone)"/><path d="m791 275 47-65h113l55 65Z" fill="url(#roof)"/><path d="M813 285h173v102H813Z" fill="url(#windows)"/>
+    <path d="M990 290h310v102H990Z" fill="url(#stone)"/><path d="m976 290 29-47h279l35 47Z" fill="url(#roof)"/><path d="M1003 300h290v84h-290Z" fill="url(#windows)"/>
+    <path d="M844 227h103v166H844Z" fill="#c9b690"/><path d="m834 227 62-102 62 102Z" fill="url(#roof)"/><path d="M855 232h81v155h-81Z" fill="url(#brick)"/>
+    <path d="M876 286v-37a20 20 0 0 1 40 0v37Z" fill="#263b45" stroke="#e0cba2" stroke-width="3"/><path d="M896 230v56m-19-18h38" stroke="#b4b49d" stroke-width="2"/>
+    <path d="M885 390v-58a11 11 0 0 1 22 0v58Z" fill="#36464b"/>
+    <path d="M830 238h18v155h-18Zm114 0h18v155h-18Z" fill="#b3a07b"/>
+    <path d="m827 238 12-30 12 30m90 0 12-30 12 30" fill="#3a4d50"/>
+    <path d="M730 242V157h21v85Z" fill="#b6aa8d"/><path d="m724 157 17-73 17 73Z" fill="#3f5a60"/><path d="M737 87v-29h7v29m-4-29V18" stroke="#314f58" fill="none"/>
+    <path d="M1252 282v-72h37v72Z" fill="#c1ad86"/><path d="m1244 210 26-35 28 35Z" fill="#455c60"/><rect x="1262" y="225" width="15" height="23" rx="7" fill="#34474c"/>
+    <path d="M428 271v-45h30v45Z" fill="#b5a582"/><path d="m423 226 20-30 21 30Z" fill="#3f565d"/>
+  </g>
+  <g fill="#273c41"><rect x="368" y="224" width="7" height="22"/><rect x="529" y="222" width="8" height="22"/><rect x="1064" y="229" width="7" height="20"/><rect x="1165" y="229" width="7" height="20"/></g>
+  <path d="M310 388h1030v14H310Z" fill="#7b7c6c"/><path d="M310 388h1030" stroke="#b8b9a1" stroke-width="3"/>
+  <g stroke="#384f4d" stroke-width="1.5"><path d="M326 369v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21m27-21v21"/><path d="M316 374h1020m-1020 8h1020"/></g>
+</svg>
