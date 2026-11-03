@@ -5,7 +5,7 @@ Rijksdienst blijft PostgreSQL gebruiken. Laravel schrijft gegevens via de bestaa
 ## Vereisten
 
 - Rijksdienst is geïnstalleerd en gestart met `start.cmd` of `scripts/setup`.
-- Govern is geïnstalleerd, gestart en bevat de PostgreSQL-uitbreiding, bijvoorbeeld de branch `feature/postgresql-demo-data`. De oudere `main` zonder `app/src/PostgresAdapter.php` is hiervoor niet geschikt.
+- Govern is geïnstalleerd, gestart en bevat de PostgreSQL-uitbreiding (`app/src/PostgresAdapter.php`). Gebruik je samengevoegde Govern-versie met deze ondersteuning; een checkout zonder deze adapter wordt door de helper geweigerd.
 - Beide projecten gebruiken dezelfde Docker Desktop-installatie met Linux-containers.
 - De huidige Govern PostgreSQL-uitbreiding ondersteunt alleen bekijken en zoeken. Laravel blijft verantwoordelijk voor imports en wijzigingen.
 
@@ -26,7 +26,7 @@ Staan `govern` en `rijksdiesnt` naast elkaar onder dezelfde gebruikersmap, dan i
 .\connect-govern.cmd
 ```
 
-Na **Klaar** open je het bestaande Govern-venster, ververs je de pagina en kies je **rijksdienst · public · PostgreSQL** in de databasekiezer. Onder Gegevens zie je de Rijksdienst-tabellen; onder Schema de foreign keys en relaties. In deze ontwikkelversie staan daar nog de gemarkeerde voorbeeldorganisaties; het CBS-verkenningscommando heeft geen cijfers geïmporteerd.
+Na **Klaar** open je het bestaande Govern-venster, ververs je de pagina en log je zo nodig opnieuw in. Kies **rijksdienst · public · PostgreSQL** in de databasekiezer. Onder Gegevens zie je de Rijksdienst-tabellen; onder Schema de foreign keys en relaties. In Explore kun je vanuit een startrecord de gekoppelde records volgen. In deze ontwikkelversie staan daar nog de gemarkeerde voorbeeldorganisaties; het CBS-verkenningscommando heeft geen cijfers geïmporteerd.
 
 Dezelfde PowerShell-helper kan ook met PowerShell 7 op Linux/macOS worden gestart:
 
@@ -77,3 +77,5 @@ Deze uitvoer bevat alleen niet-geheime metadata, zoals database, schema, rol en 
 De geautomatiseerde controles omvatten echte PostgreSQL-leesrechten en geweigerde INSERT/UPDATE/DELETE/DDL in de afzonderlijke testdatabase, wachtwoordbehoud, rolconflicten en gesimuleerde PowerShell-succes- en foutpaden.
 
 De volledige helper is ook met PowerShell 7 en Docker op Linux uitgevoerd tegen een afzonderlijke Govern-installatie op `feature/postgresql-demo-data` (`fccb4b3`). De echte Govern-adapter zag acht Rijksdienst-tabellen en weigerde schrijven. In de browser zijn de databasekeuze, voorbeeldrecords, leesmodus, foreign keys in Schema en behoud van de selectie na verversen gecontroleerd. Een test in deze cloud betekent niet dat een verbinding op jouw Windows-computer al is ingesteld; Docker Desktop op Windows is hier niet uitgevoerd.
+
+De koppeling is daarna opnieuw uitgevoerd met de samengevoegde Govern-versie `integrate/all-govern-updates` (`d94d6e5`). De bestaande Rijksdienst-leesrol en het bestaande Govern-account bleven bruikbaar. De adapter zag opnieuw acht tabellen en weigerde schrijven, ook met uitgeschakelde sessie-readonly. De browsercontrole bevestigde records, het schemadiagram, Explore met de exacte UUID-sleutel van een organisatie en behoud van de databasekeuze na herladen, zonder browser- of API-fouten. Deze herkoppeling vereiste geen wijziging aan de helper of de Govern-broncode.
