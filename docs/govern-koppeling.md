@@ -17,7 +17,7 @@ Start Govern eerst vanuit de Govern-map. Open vervolgens PowerShell in de bestaa
 
 ```powershell
 git pull origin main
-.\connect-govern.cmd -GovernPath "C:\Users\esmee\govern"
+.\connect-govern.cmd -GovernPath "C:\Users\esmee\Documents\GitHub\govern"
 ```
 
 Staan `govern` en `rijksdiesnt` naast elkaar onder dezelfde gebruikersmap, dan is dit voldoende:
@@ -25,6 +25,8 @@ Staan `govern` en `rijksdiesnt` naast elkaar onder dezelfde gebruikersmap, dan i
 ```powershell
 .\connect-govern.cmd
 ```
+
+Krijg je tijdens `build app` de Windows-melding `failed to get console: The handle is invalid.`, werk dan Rijksdienst bij met `git pull origin main` en voer dezelfde koppeling opnieuw uit. De helper gebruikt nu gewone tekstuitvoer voor Docker Compose en BuildKit en toont bouwmeldingen direct, ook wanneer de bouw mislukt. De oorspronkelijke `BUILDKIT_PROGRESS`-instelling wordt na afloop hersteld.
 
 Na **Klaar** open je het bestaande Govern-venster, ververs je de pagina en log je zo nodig opnieuw in. Kies **rijksdienst · public · PostgreSQL** in de databasekiezer. Onder Gegevens zie je de Rijksdienst-tabellen; onder Schema de foreign keys en relaties. In Explore kun je vanuit een startrecord de gekoppelde records volgen. In deze ontwikkelversie staan daar nog de gemarkeerde voorbeeldorganisaties; het CBS-verkenningscommando heeft geen cijfers geïmporteerd.
 
@@ -75,6 +77,8 @@ docker compose run --rm --no-deps app php artisan govern:prepare-reader --json
 Deze uitvoer bevat alleen niet-geheime metadata, zoals database, schema, rol en bestandslocatie. Voor een volledige netwerk- en Govern-controle gebruik je opnieuw `connect-govern.cmd`.
 
 De geautomatiseerde controles omvatten echte PostgreSQL-leesrechten en geweigerde INSERT/UPDATE/DELETE/DDL in de afzonderlijke testdatabase, wachtwoordbehoud, rolconflicten en gesimuleerde PowerShell-succes- en foutpaden.
+
+De PowerShell-regressiecontrole simuleert ook de Windows-consolefout wanneer Compose geen expliciete tekstuitvoer of BuildKit geen `plain`-instelling krijgt. Daarbij worden behoud van bestaande voortgangsinstellingen en zichtbare foutmeldingen gecontroleerd bij zowel succes als fouten. Deze simulatie draait met PowerShell 7 in de cloud; de oorspronkelijke Windows-fout is hier niet op Docker Desktop gereproduceerd.
 
 De volledige helper is ook met PowerShell 7 en Docker op Linux uitgevoerd tegen een afzonderlijke Govern-installatie op `feature/postgresql-demo-data` (`fccb4b3`). De echte Govern-adapter zag acht Rijksdienst-tabellen en weigerde schrijven. In de browser zijn de databasekeuze, voorbeeldrecords, leesmodus, foreign keys in Schema en behoud van de selectie na verversen gecontroleerd. Een test in deze cloud betekent niet dat een verbinding op jouw Windows-computer al is ingesteld; Docker Desktop op Windows is hier niet uitgevoerd.
 

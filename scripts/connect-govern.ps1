@@ -6,17 +6,21 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $previousOutputEncoding = $OutputEncoding
+$previousBuildkitProgress = $env:BUILDKIT_PROGRESS
 
 function Invoke-Docker {
     param([Parameter(Mandatory = $true)][string[]]$Arguments, [switch]$Capture, [AllowEmptyString()][string]$InputText)
-    if ($PSBoundParameters.ContainsKey('InputText')) {
-        $output = $InputText | & docker @Arguments
+    if ($Capture) {
+        if ($PSBoundParameters.ContainsKey('InputText')) { $output = $InputText | & docker @Arguments }
+        else { $output = & docker @Arguments }
     }
-    else { $output = & docker @Arguments }
+    elseif ($PSBoundParameters.ContainsKey('InputText')) {
+        $InputText | & docker @Arguments
+    }
+    else { & docker @Arguments }
     $exitCode = $LASTEXITCODE
     if ($exitCode -ne 0) { throw "Docker is gestopt met foutcode $exitCode. Bekijk de melding hierboven; bestaande gegevens zijn niet verwijderd." }
     if ($Capture) { return $output }
-    foreach ($line in @($output)) { Write-Host $line }
 }
 
 Push-Location -LiteralPath $projectRoot
@@ -86,8 +90,11 @@ try {
     $metadata = @(('RIJKSDIENST_GOVERN_HOST=' + $containerName), ('RIJKSDIENST_GOVERN_NETWORK=' + $networkName))
     [System.IO.File]::WriteAllLines($networkFile, $metadata, (New-Object System.Text.UTF8Encoding($false)))
 
-    $governConnected = $governBase + @('--env-file', $readerFile, '--env-file', $networkFile, '-f', (Join-Path $projectRoot 'compose.govern.yaml'))
+    # Windows PowerShell and redirected output do not provide a usable console
+    # handle for Docker's interactive build display. Use plain text throughout.
+    $governConnected = $governBase + @('--ansi', 'never', '--progress', 'plain', '--env-file', $readerFile, '--env-file', $networkFile, '-f', (Join-Path $projectRoot 'compose.govern.yaml'))
     Write-Host 'Alleen de Govern-webapp met PostgreSQL-ondersteuning bouwen en verbinden...'
+    $env:BUILDKIT_PROGRESS = 'plain'
     Invoke-Docker -Arguments ($governConnected + @('build', 'app'))
     Invoke-Docker -Arguments ($governConnected + @('up', '-d', '--no-deps', '--wait', '--wait-timeout', '120', 'app'))
 
@@ -106,6 +113,7 @@ catch {
     exit 1
 }
 finally {
+    $env:BUILDKIT_PROGRESS = $previousBuildkitProgress
     $OutputEncoding = $previousOutputEncoding
     Pop-Location
 }
