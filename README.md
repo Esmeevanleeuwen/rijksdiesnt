@@ -66,6 +66,16 @@ De controles voeren PostgreSQL-integratie/API-tests, PHP-stijlcontrole, Vue-inte
 - [Projectbesluiten en volgende stappen](docs/project-start.md).
 - [Eerste deel: opgeleverd en afbakening](docs/eerste-deel.md).
 
+## Govern als databasewerkplek
+
+Govern kan de bestaande PostgreSQL-database via een afzonderlijke leesverbinding bekijken. Start je PostgreSQL-capabele Govern-versie en voer in de Rijksdienst-map uit:
+
+```powershell
+.\connect-govern.cmd -GovernPath "C:\Users\esmee\govern"
+```
+
+Zie [Govern koppelen aan Rijksdienst](docs/govern-koppeling.md) voor vereisten, de lokale verbindingsprofielen en herstartgedrag.
+
 ## Eerste echte databronnen
 
 Zie [de onderzochte overheidsbronnen en importvolgorde](docs/databronnen.md) en de machineleesbare inventaris in [data/sources.json](data/sources.json). Voor een eerste alleen-lezen CBS-catalogusinspectie:

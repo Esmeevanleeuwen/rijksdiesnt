@@ -1,0 +1,20 @@
+# Overlay for an existing Govern PostgreSQL-capable checkout.
+# The helper supplies Govern's .env and the private Rijksdienst reader profile.
+services:
+  app:
+    environment:
+      PG_ENABLED: "1"
+      PG_HOST: ${RIJKSDIENST_GOVERN_HOST:?Run connect-govern first}
+      PG_PORT: "5432"
+      PG_DATABASE: rijksdienst
+      PG_SCHEMAS: public
+      PG_READ_USER: rijksdienst_govern_reader
+      PG_READ_PASSWORD: ${RIJKSDIENST_GOVERN_READ_PASSWORD:?Run govern:prepare-reader first}
+    networks:
+      default: {}
+      rijksdienst_data: {}
+
+networks:
+  rijksdienst_data:
+    external: true
+    name: ${RIJKSDIENST_GOVERN_NETWORK:?Run connect-govern first}
