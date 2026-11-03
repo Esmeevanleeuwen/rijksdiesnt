@@ -8,7 +8,23 @@ Zie [Frontend en schermroutes](docs/frontend.md) voor de nagebouwde schermen, in
 
 ## Starten
 
-Vereisten: Docker Engine met Compose v2, Git en een POSIX-shell. PHP, Composer, Node en PostgreSQL draaien in containers. Node 24 is alleen nodig wanneer je de frontend buiten Docker ontwikkelt.
+Vereisten: Git en Docker met Compose v2. Op Windows: installeer en start Docker Desktop met Linux-containers. PHP, Composer, Node en PostgreSQL draaien in containers. Node 24 is alleen nodig wanneer je de frontend buiten Docker ontwikkelt.
+
+### Windows (PowerShell)
+
+Open PowerShell en voer uit:
+
+```powershell
+git clone https://github.com/Esmeevanleeuwen/rijksdiesnt.git
+cd rijksdiesnt
+.\start.cmd
+```
+
+Heb je al gecloned? Voer in die bestaande projectmap `git pull origin main` en daarna `.\start.cmd` uit. Het startscript installeert de afhankelijkheden, bewaart bestaande instellingen en controleert of de website en API bereikbaar zijn. Open na de melding **Klaar** `http://localhost:5173` in je browser.
+
+Voor volgende bezoeken: `docker compose up -d`. Stoppen: `docker compose down`. Bij problemen: `docker compose logs --tail=60 app frontend`. De extensieloze bestanden onder `scripts/` zijn shellscripts voor Linux, macOS, Git Bash of WSL; voer deze niet rechtstreeks uit in PowerShell.
+
+### Linux, macOS of WSL
 
 ```sh
 git clone https://github.com/Esmeevanleeuwen/rijksdiesnt.git

@@ -5,6 +5,13 @@ permissions:
   contents: read
 
 jobs:
+  windows-startup:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Windows PowerShell startup and failure handling
+        run: python scripts/test_windows_setup.py
+
   backend:
     runs-on: ubuntu-latest
     services:

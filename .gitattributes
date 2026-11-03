@@ -1,0 +1,9 @@
+* text=auto
+/scripts/setup text eol=lf
+/scripts/compose text eol=lf
+/scripts/check text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+Dockerfile text eol=lf
