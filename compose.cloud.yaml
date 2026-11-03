@@ -8,6 +8,7 @@ services:
       COMPOSER_HOME: /tmp/composer
       COMPOSER_CAFILE: /run/cloud-ca.pem
       GIT_SSL_CAINFO: /run/cloud-ca.pem
+      GOVERNMENT_DATA_CA_BUNDLE: /run/cloud-ca.pem
     volumes:
       - /etc/ssl/certs/ca-certificates.crt:/run/cloud-ca.pem:ro
   frontend:

@@ -2,6 +2,10 @@
 
 return [
 
+    'government_data' => [
+        'ca_bundle' => env('GOVERNMENT_DATA_CA_BUNDLE'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Third Party Services

@@ -66,6 +66,16 @@ De controles voeren PostgreSQL-integratie/API-tests, PHP-stijlcontrole, Vue-inte
 - [Projectbesluiten en volgende stappen](docs/project-start.md).
 - [Eerste deel: opgeleverd en afbakening](docs/eerste-deel.md).
 
+## Eerste echte databronnen
+
+Zie [de onderzochte overheidsbronnen en importvolgorde](docs/databronnen.md) en de machineleesbare inventaris in [data/sources.json](data/sources.json). Voor een eerste alleen-lezen CBS-catalogusinspectie:
+
+```powershell
+docker compose run --rm --no-deps app php artisan data:discover-cbs --limit=5 --json
+```
+
+Dit inspecteert echte bronmetadata zodra CBS bereikbaar is. Er worden nog geen cijfers geïmporteerd of voorbeeldgegevens vervangen.
+
 ## API
 
 `GET /api/v1/organizations` ondersteunt `q`, `type`, `page` en `per_page`. `GET /api/v1/organizations/{uuid}` toont één organisatie. Antwoorden bevatten `data` en `meta`, inclusief de demostatus. Ongeldige zoekparameters geven 422; een onbekende of ongeldige organisatie-ID geeft 404.

@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "status": "research_inventory_not_live_import_configuration",
+  "sources": [
+    {
+      "id": "roo-tooi",
+      "name": "Register van Overheidsorganisaties en TOOI-identiteiten",
+      "kind": "organization_register",
+      "homepage": "https://organisaties.overheid.nl/",
+      "purpose": "Stabiele organisatie-identiteiten en bronverwijzingen voor organisatieprofielen.",
+      "documented_endpoints": [],
+      "mapping_ready": false,
+      "licence": {
+        "status": "review_required",
+        "note": "ROO-export en licentie nog bij de bron controleren; geen toestemming uit een softwarelicentie afleiden."
+      },
+      "usage_evidence": {
+        "level": "documented_official_consumer",
+        "note": "Het officiële API-register resolveert organisatielabels uit TOOI; het OSS-register verlangt een organisaties.overheid.nl-URL.",
+        "url": "https://github.com/developer-overheid-nl/don-register-site/blob/32b71919a57df1e9819a17b94f4c95e8f38d9c41/apps/api-register/src/types/api-schema.prod.ts"
+      },
+      "checked_on": "2026-11-03",
+      "verification_status": "documentation_verified_live_access_blocked",
+      "live_verified": false,
+      "automatic_import_enabled": false
+    },
+    {
+      "id": "cbs-statline",
+      "name": "CBS StatLine OData4-catalogus",
+      "kind": "statistical_catalogue",
+      "homepage": "https://www.cbs.nl/nl-nl/onze-diensten/open-data",
+      "purpose": "Actuele bevolking-, huishoudens-, woning- en regiometadata selecteren; cijfers pas importeren na controle van eenheden, perioden en regiocodes.",
+      "documented_endpoints": [
+        "https://datasets.cbs.nl/odata/Datasets"
+      ],
+      "mapping_ready": false,
+      "licence": {
+        "status": "source_documented_details_to_verify",
+        "label": "Creative Commons Naamsvermelding; CBS-bronvermelding verplicht",
+        "evidence": "https://github.com/statistiekcbs/CBS-Open-Data-v3/blob/master/README.md#licentie",
+        "note": "Controleer de actuele CBS-voorwaarden en de geselecteerde tabel. Geen exacte CC-versie afgeleid uit een softwarelicentie."
+      },
+      "usage_evidence": {
+        "level": "official_publisher_and_examples",
+        "note": "Officieel CBS-clientcontract; geen concreet ministerieel beleidsdocument met een specifieke tabel gecontroleerd.",
+        "url": "https://github.com/statistiekcbs/cbsodata4/blob/e064dfa5f3cdc33d5040813d53917d23c6c750c5/R/cbs4_get_datasets.R"
+      },
+      "checked_on": "2026-11-03",
+      "verification_status": "documentation_verified_live_access_blocked",
+      "live_verified": false,
+      "automatic_import_enabled": false
+    },
+    {
+      "id": "pdok-bestuurlijke-gebieden",
+      "name": "PDOK Bestuurlijke Gebieden — provinciegebied",
+      "kind": "geographic_features",
+      "homepage": "https://www.pdok.nl/",
+      "purpose": "Een eerste kleine geografische bron voor provincies; gebieden apart houden van organisatie-entiteiten.",
+      "documented_endpoints": [
+        "https://api.pdok.nl/kadaster/bestuurlijkegebieden/ogc/v1/collections",
+        "https://api.pdok.nl/kadaster/bestuurlijkegebieden/ogc/v1/collections/provinciegebied/items?f=json&limit=20"
+      ],
+      "mapping_ready": false,
+      "licence": {
+        "status": "review_required",
+        "note": "Haal de licentie uit de productiemetadata; CC0 in een voorbeeldconfig is geen productiebewijs."
+      },
+      "usage_evidence": {
+        "level": "official_documented_example",
+        "note": "De officiële PDOK-leermodule gebruikt deze API en collectie.",
+        "url": "https://github.com/PDOK/leermodule-ogc-api/blob/f627d99187c962321535b2302f155e53f3cdb031/docs/voorbeelden/features/main.js"
+      },
+      "checked_on": "2026-11-03",
+      "verification_status": "documentation_verified_live_access_blocked",
+      "live_verified": false,
+      "automatic_import_enabled": false
+    },
+    {
+      "id": "pdok-bag",
+      "name": "BAG — adressen via PDOK",
+      "kind": "base_register_geography",
+      "homepage": "https://www.pdok.nl/",
+      "purpose": "Later adres- en gebouwcontext verbinden met regio’s; begrensd beginnen en BAG-objecttypen apart identificeren.",
+      "documented_endpoints": [
+        "https://api.pdok.nl/kadaster/bag/ogc/v2/collections/adres/items",
+        "https://api.pdok.nl/kadaster/bag/ogc/v2/collections/adres/queryables"
+      ],
+      "mapping_ready": false,
+      "licence": {
+        "status": "review_required",
+        "note": "Actuele bronvoorwaarden en objectidentificaties controleren vóór import."
+      },
+      "usage_evidence": {
+        "level": "official_base_register_context",
+        "note": "Officiële PDOK-documentatie beschrijft basisregistraties als landelijk gebruikte registraties voor overheidsorganisaties.",
+        "url": "https://github.com/PDOK/leermodule-ogc-api/blob/f627d99187c962321535b2302f155e53f3cdb031/docs/achtergrondinformatie/Wat%20is%20geo-informatie.md"
+      },
+      "checked_on": "2026-11-03",
+      "verification_status": "documentation_verified_live_access_blocked",
+      "live_verified": false,
+      "automatic_import_enabled": false
+    },
+    {
+      "id": "data-overheid",
+      "name": "Data.overheid.nl",
+      "kind": "dataset_metadata_catalogue",
+      "homepage": "https://data.overheid.nl/",
+      "purpose": "Datasetbeschrijvingen, aanbieders, distributies en bronlicenties vinden; catalogusmetadata is geen cijferbestand.",
+      "documented_endpoints": [],
+      "mapping_ready": false,
+      "licence": {
+        "status": "per_dataset_and_distribution",
+        "note": "Licentie en toegangsvoorwaarden per dataset én distributie vastleggen."
+      },
+      "usage_evidence": {
+        "level": "official_catalogue_implementation",
+        "note": "Officiële CKAN-extensie beschrijft het catalogusbackend; het codecontract is oud en bewijst niet het actuele productiepad.",
+        "url": "https://github.com/dataoverheid/ckanext-dataoverheid/blob/06a84f7aa795d4d1e2e23db40b95ba7f8bd99615/README.md"
+      },
+      "checked_on": "2026-11-03",
+      "verification_status": "documentation_verified_live_access_blocked",
+      "live_verified": false,
+      "automatic_import_enabled": false
+    },
+    {
+      "id": "tweede-kamer",
+      "name": "Tweede Kamer Open Data",
+      "kind": "parliamentary_information",
+      "homepage": "https://opendata.tweedekamer.nl/",
+      "purpose": "Later parlementaire documenten, besluiten en vergaderingen toevoegen; parlement is een andere broncategorie dan de uitvoerende Rijksoverheid.",
+      "documented_endpoints": [
+        "https://gegevensmagazijn.tweedekamer.nl/OData/v4/2.0"
+      ],
+      "mapping_ready": false,
+      "licence": {
+        "status": "current_terms_to_verify",
+        "note": "Officieel DCAT-voorbeeld noemt CC0; actuele voorwaarden en rechten op bijlagen nog controleren."
+      },
+      "usage_evidence": {
+        "level": "official_catalogue_example",
+        "note": "Officieel DCAT-voorbeeld beschrijft de Tweede Kamer als uitgever van de OData-service.",
+        "url": "https://github.com/dataoverheid/dcat-ap-donl/blob/73218678126b062468fb28ac154c73898c6700c0/docs/klassen/dataservice/examples.md"
+      },
+      "checked_on": "2026-11-03",
+      "verification_status": "documentation_verified_live_access_blocked",
+      "live_verified": false,
+      "automatic_import_enabled": false
+    },
+    {
+      "id": "developer-api-register",
+      "name": "API-register Developer.Overheid.nl",
+      "kind": "api_metadata_catalogue",
+      "homepage": "https://apis.developer.overheid.nl/",
+      "purpose": "Later technische broninterfaces vinden en aan organisaties koppelen.",
+      "documented_endpoints": [
+        "https://api.developer.overheid.nl/api-register/v1/apis",
+        "https://api.developer.overheid.nl/api-register/v1/organisations"
+      ],
+      "mapping_ready": false,
+      "licence": {
+        "status": "review_required",
+        "note": "Software-EUPL is geen algemene licentie voor registerinhoud."
+      },
+      "authentication": {
+        "status": "api_key_required_per_documentation",
+        "live_tested": false,
+        "note": "Eventueel later een eigen leessleutel aanvragen; geen sleutel nodig om met CBS/PDOK te beginnen."
+      },
+      "usage_evidence": {
+        "level": "official_portal_schema",
+        "note": "Actuele gegenereerde schema’s en leesautorisatie gedocumenteerd in het officiële repository.",
+        "url": "https://github.com/developer-overheid-nl/don-register-site/blob/32b71919a57df1e9819a17b94f4c95e8f38d9c41/apps/api-register/src/pages/apis/toevoegen.md"
+      },
+      "checked_on": "2026-11-03",
+      "verification_status": "documentation_verified_live_access_blocked",
+      "live_verified": false,
+      "automatic_import_enabled": false
+    }
+  ]
+}
